@@ -30,8 +30,8 @@ class MainActivity : AppCompatActivity() {
                 0
             }
 
-            val intent = Intent(this, MainActivity::class.java)
-            val pendingIntent = PendingIntent.getActivity(this, 0, intent, flag)
+            val intent = Intent(this, NotifReceiver::class.java).putExtra("Message", "Baca Selengkapnya")
+            val pendingIntent = PendingIntent.getBroadcast(this, 0, intent, flag)
 
             val builder = NotificationCompat.Builder(this, channelId)
                 .setSmallIcon(R.drawable.baseline_notifications_24)
@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
                 .setContentText("Hello World")
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setAutoCancel(true)
-                .setContentIntent(pendingIntent)
+                .addAction(0, "Baca Selengkapnya", pendingIntent)
 
 
 
