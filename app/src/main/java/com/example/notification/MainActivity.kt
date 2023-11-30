@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
                 .setSmallIcon(R.drawable.baseline_notifications_24)
                 .setContentTitle("Notifikasi Saya")
                 .setContentText("Hello World")
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setAutoCancel(true)
 
             val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE)
@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
                 val channel = NotificationChannel(
                     channelId,
                     "Notifku",
-                    NotificationManager.IMPORTANCE_DEFAULT
+                    NotificationManager.IMPORTANCE_HIGH
                 )
                 with(notificationManager) {
                     createNotificationChannel(channel)
