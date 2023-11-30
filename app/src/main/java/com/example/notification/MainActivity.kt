@@ -72,8 +72,6 @@ class MainActivity : AppCompatActivity() {
                 .setAutoCancel(true)
                 .addAction(0, "Baca Selengkapnya", pendingIntent)
 
-
-
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 val channel = NotificationChannel(
                     channelId,
