@@ -5,6 +5,7 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -22,6 +23,36 @@ class MainActivity : AppCompatActivity() {
 
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE)
                 as NotificationManager
+
+        binding.btnUpdate.setOnClickListener {
+            val notifImage = BitmapFactory.decodeResource(resources, R.drawable.msg_icon)
+            val builder = NotificationCompat.Builder(this, channelId)
+                .setSmallIcon(R.drawable.baseline_notifications_24)
+                .setContentTitle("Notifikasi Saya")
+                .setContentText("Hello World")
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setAutoCancel(true)
+                .setLargeIcon(notifImage)
+                .setStyle(
+                    NotificationCompat.BigPictureStyle()
+                        .bigPicture(notifImage)
+                        .bigLargeIcon(null)
+                )
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                val channel = NotificationChannel(
+                    channelId,
+                    "Notifku",
+                    NotificationManager.IMPORTANCE_HIGH
+                )
+                with(notificationManager) {
+                    createNotificationChannel(channel)
+                    notify(0, builder.build())
+                }
+            } else {
+                notificationManager.notify(0, builder.build())
+            }
+        }
 
         binding.btnNotif.setOnClickListener{
             val flag = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
